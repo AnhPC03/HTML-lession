@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit an item</title>
+</head>
+<body>
+	<input id = 'new-item' type="text">
+	<button id = 'button'>Save</button>
+	<ul id = 'ul'></ul>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript">
+		var url = 'http://localhost:9081/todos';
+		var idString = window.location.hash.substring(1);
+		var newItem = document.getElementById('new-item');
+		var ul = document.getElementById('ul');
+		var button = document.getElementById('button');
+		button.addEventListener('click', onAddNewItem);
+
+		function showContent() {
+			var item = JSON.parse(sessionStorage.getItem('draft'));
+			ul.innerHTML = '<li>' + item.content + '</li>';
+		}
+
+		function onAddNewItem() {
+			data = {
+				content : newItem.value
+			}
+			var newUrl = url + '/' + idString;
+			axios.put(newUrl, data)
+			.then((res) => {
+				newItem.value = '';
+				alert('Save successfully');
+				window.location.href = "/index.html";
+			})
+			.catch((err) => {
+				alert('Error');
+			});
+		}
+
+		showContent();
+	</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TODO LIST</title>
+</head>
+<body>
+
+	<h1>Todo List</h1>
+
+	<input id = 'new-item' type="text">
+	<button id = 'button'>Add</button>
+
+	<ul id = 'todo-list'></ul>
+
+	<script type="text/javascript">
+		var todoList;
+		var dataString = localStorage.getItem('List');
+		if (dataString) {
+			todoList = JSON.parse(dataString);
+		} else {
+			todoList = [
+				'Get up',
+				'Take breakfast',
+				'Have lunch',
+				'Take shower',
+				'Eat dinner'
+			];
+		}
+
+		var newItem = document.getElementById('new-item');
+		var button = document.getElementById('button');
+		var list = document.getElementById('todo-list');
+
+		button.addEventListener('click', onAddNewItem);
+		list.addEventListener('click', onDeleteItem);
+
+		function onDeleteItem(event) {
+			var button = event.target;
+			var id = parseInt(button.dataset.id);
+			todoList.splice(id, 1);
+			render();
+			localStorage.setItem('List', JSON.stringify(todoList));
+		}
+
+		function onAddNewItem() {
+			todoList.push(newItem.value);
+			render();
+			localStorage.setItem('List', JSON.stringify(todoList));
+			newItem.value = '';
+		}
+
+		function render() {
+			var content = todoList.map((item, i) => '<li>' + item + ' <button data-id = "' + i + '">Delete</button></li>');
+			list.innerHTML = content.join('');
+		}
+
+		render();
+	</script>
+</body>
+</html>

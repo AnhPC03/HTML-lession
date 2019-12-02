@@ -1,0 +1,32 @@
+{
+  "todos": [
+    {
+      "content": "Get up",
+      "id": 1
+    },
+    {
+      "content": "Take the breakfast",
+      "id": 2
+    },
+    {
+      "id": 3,
+      "content": "Have lunch"
+    },
+    {
+      "id": 4,
+      "content": "Play badminton"
+    },
+    {
+      "content": "Take shower",
+      "id": 5
+    },
+    {
+      "content": "Watch television",
+      "id": 6
+    },
+    {
+      "content": "Do homeworks",
+      "id": 7
+    }
+  ]
+}

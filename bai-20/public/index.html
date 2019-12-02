@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TODO LIST</title>
+</head>
+<body>
+
+  <h1>Todo List</h1>
+
+  <input id = 'new-item' type="text">
+  <button id = 'button'>Add</button>
+
+  <ul id = 'todo-list'></ul>
+
+  <script type="text/javascript">
+    var todoList;
+    var dataString = localStorage.getItem('List');
+    if (dataString) {
+      todoList = JSON.parse(dataString);
+    } else {
+      todoList = [
+        'Get up',
+        'Take breakfast',
+        'Have lunch',
+        'Take shower',
+        'Eat dinner'
+      ];
+    }
+
+    var newItem = document.getElementById('new-item');
+    var button = document.getElementById('button');
+    button.addEventListener('click', onAddNewItem);
+
+    function onAddNewItem() {
+      todoList.push(newItem.value);
+      render();
+      localStorage.setItem('List', JSON.stringify(todoList));
+      newItem.value = '';
+    }
+
+    function render() {
+      var list = document.getElementById('todo-list');
+      var content = todoList.map((item) => '<li>' + item + '</li>');
+      list.innerHTML = content.join('');
+    }
+
+    render();
+  </script>
+</body>
+</html>

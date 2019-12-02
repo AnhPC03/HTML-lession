@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add new item</title>
+</head>
+<body>
+
+	<input id = 'new-item' type="text">
+	<button id = 'button'>Add</button>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript">
+		var url = 'http://localhost:9081/todos';
+		var newItem = document.getElementById('new-item');
+		var button = document.getElementById('button');
+		button.addEventListener('click', onAddNewItem);
+
+		function onAddNewItem() {
+			data = {
+				content : newItem.value
+			}
+			axios.post(url, data)
+			.then((res) => {
+				newItem.value = '';
+				alert('Add successfully');
+				window.location.href = "/index.html";
+			})
+			.catch((err) => {
+				alert('Error');
+			});
+			
+		}
+	</script>
+</body>
+</html>
